@@ -187,7 +187,7 @@ In a new conversation, you should see a small hammer/tools icon indicating avail
   "mcpServers": {
     "real-estate-tools": {
       "command": "python",
-      "args": ["/Users/yourname/hfa-ai-training/05-mcp/simple_mcp_server.py"]
+      "args": ["/Users/yourname/hfa-ai-training/05-mcp/grocery_mcp_server.py"]
     }
   }
 }
@@ -222,20 +222,14 @@ In a new conversation, you should see a small hammer/tools icon indicating avail
 
 | File | What It Demonstrates |
 |------|---------------------|
-| `simple_mcp_server.py` | A basic MCP server with 3 tools (weather, listings, mortgage) |
-| `mcp_with_resources.py` | An advanced server showing both tools AND resources |
-| `claude_desktop_config_example.json` | How to configure a desktop MCP client to use these servers |
+| `grocery_mcp_server.py` | MCP server with 3 tools: search products, get nutrition, check stock |
+| `mcp_overview.ipynb` | Read the server code, simulate tool calls, configure a client |
 
 ### Quick Start
 
 ```bash
-# 1. Install the MCP Python SDK
 pip install mcp
-
-# 2. Run the simple server (for testing — your MCP client runs it automatically)
-python simple_mcp_server.py
-
-# 3. Or configure your MCP client to run it (see the config example)
+jupyter notebook mcp_overview.ipynb
 ```
 
 ---
