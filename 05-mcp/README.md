@@ -4,7 +4,7 @@
 
 **Model Context Protocol (MCP)** is an open standard for connecting AI models to external tools and data sources. Think of it as a **universal adapter** — instead of building custom integrations for every tool an AI needs, MCP provides one standard way for AI to talk to the outside world.
 
-Before MCP, if you wanted Claude to check your database, you had to build a custom integration. If you also wanted it to search your files, that was a separate custom build. MCP says: "Let's create one protocol that works for everything."
+Before MCP, if you wanted an LLM to check your database, you had to build a custom integration. If you also wanted it to search your files, that was a separate custom build. MCP says: "Let's create one protocol that works for everything."
 
 > **The key idea:** MCP lets you go from an AI that _talks_ about doing things to an AI that _actually does_ things.
 
@@ -24,11 +24,11 @@ Before MCP, if you wanted Claude to check your database, you had to build a cust
 5. You compile everything into an email
 
 **After MCP (agentified process):**
-1. Client asks Claude about homes in Kailua under $1.5M
-2. Claude calls `search_listings` tool -> gets results
-3. Claude calls `calculate_mortgage` tool -> gets payment estimates
-4. Claude calls `get_weather` tool -> gets local conditions
-5. Claude composes a personalized response with all the data
+1. Client asks GPT-4o about homes in Kailua under $1.5M
+2. GPT-4o calls `search_listings` tool -> gets results
+3. GPT-4o calls `calculate_mortgage` tool -> gets payment estimates
+4. GPT-4o calls `get_weather` tool -> gets local conditions
+5. GPT-4o composes a personalized response with all the data
 
 The AI **decides which tools to call and in what order** based on the conversation. You are not scripting it step by step — the agent figures out the plan.
 
@@ -41,8 +41,8 @@ The AI **decides which tools to call and in what order** based on the conversati
 | Component | What It Is | Example |
 |-----------|-----------|---------|
 | **MCP Server** | A program that exposes tools, resources, and prompts | A Python script that can search listings |
-| **MCP Client** | An AI-powered app that connects to servers | Claude Desktop, Claude Code, Cursor |
-| **The AI Model** | The brain that decides what to do | Claude, GPT, etc. |
+| **MCP Client** | An AI-powered app that connects to servers | Claude Desktop, Cursor, custom apps |
+| **The AI Model** | The brain that decides what to do | GPT-4o, Claude, Gemini, etc. |
 
 ### What Servers Expose
 
@@ -60,11 +60,11 @@ MCP servers can provide three types of capabilities:
 │                                                             │
 │  ┌───────────────────┐       ┌────────────────────────┐     │
 │  │   MCP Client      │       │   MCP Server A         │     │
-│  │  (Claude Desktop)  │◄────►│  (Real Estate Tools)   │     │
+│  │  (AI Application)  │◄────►│  (Real Estate Tools)   │     │
 │  │                   │ stdio │  - search_listings     │     │
 │  │  ┌─────────────┐ │       │  - calculate_mortgage  │     │
 │  │  │  AI Model   │ │       └────────────────────────┘     │
-│  │  │  (Claude)   │ │                                       │
+│  │  │  (GPT-4o)   │ │                                       │
 │  │  │             │ │       ┌────────────────────────┐     │
 │  │  │ "I should   │ │       │   MCP Server B         │     │
 │  │  │  call the   │ │◄────►│  (File System)         │     │
@@ -89,7 +89,7 @@ User asks a question
         │
         ▼
 ┌──────────────────┐
-│  Claude (Model)  │  "I need to search listings to answer this"
+│  GPT-4o (Model)  │  "I need to search listings to answer this"
 └────────┬─────────┘
          │
          ▼
@@ -104,7 +104,7 @@ User asks a question
          │
          ▼
 ┌──────────────────┐
-│  Claude (Model)  │  Uses results to form a response
+│  GPT-4o (Model)  │  Uses results to form a response
 └──────────────────┘
 ```
 
@@ -123,7 +123,7 @@ User asks a question
 
 | Advantage | Why It Matters |
 |-----------|---------------|
-| **Standardized protocol** | Build once, works with Claude Desktop, Claude Code, Cursor, and more |
+| **Standardized protocol** | Build once, works with any MCP-compatible client (Cursor, Claude Desktop, custom apps, and more) |
 | **Real system access** | Agents can query databases, call APIs, read/write files — do real work |
 | **Composable** | Mix and match servers. Need listings + weather + email? Add three servers. |
 | **Secure by design** | You control exactly which tools the agent can access. Nothing hidden. |
@@ -143,7 +143,9 @@ User asks a question
 
 ---
 
-## Using MCP in the Claude Desktop App
+## Using MCP with a Desktop Client
+
+Many AI desktop apps support MCP, including Claude Desktop and Cursor. Here we show the Claude Desktop configuration as an example, but the pattern is similar across clients.
 
 ### Step 1: Find Your Config File
 
@@ -170,13 +172,13 @@ Open the file and add your MCP servers. Here is the structure:
 }
 ```
 
-### Step 3: Restart Claude Desktop
+### Step 3: Restart the Client
 
-After saving the config, **completely quit and reopen** Claude Desktop. The servers will start automatically.
+After saving the config, **completely quit and reopen** the desktop client. The servers will start automatically.
 
 ### Step 4: Verify
 
-In a new Claude Desktop conversation, you should see a small hammer/tools icon indicating available MCP tools. Click it to see which tools are connected.
+In a new conversation, you should see a small hammer/tools icon indicating available MCP tools. Click it to see which tools are connected.
 
 ### Walk-Through: Adding the Example Server from This Module
 
@@ -202,7 +204,7 @@ In a new Claude Desktop conversation, you should see a small hammer/tools icon i
 - You want an AI agent to **DO things**, not just talk about them
 - You are **automating workflows** that touch external systems (databases, APIs, file systems)
 - You are building **internal tools** powered by AI for your team
-- You want to give Claude access to **your specific data** (company docs, CRM, listings)
+- You want to give your LLM access to **your specific data** (company docs, CRM, listings)
 - You need a **standardized approach** that works across multiple AI clients
 - You want **composable capabilities** — add/remove tools without changing the AI
 
@@ -212,7 +214,7 @@ In a new Claude Desktop conversation, you should see a small hammer/tools icon i
 - Your **security constraints** are extremely tight and you cannot allow any tool execution
 - The task is a **one-off** that is faster to do manually than to set up a server
 - You need **real-time streaming** of large datasets (MCP is better for request/response patterns)
-- **Pre-built integrations** already exist (e.g., Claude's built-in web search)
+- **Pre-built integrations** already exist (e.g., the LLM's built-in web search)
 
 ---
 
@@ -222,7 +224,7 @@ In a new Claude Desktop conversation, you should see a small hammer/tools icon i
 |------|---------------------|
 | `simple_mcp_server.py` | A basic MCP server with 3 tools (weather, listings, mortgage) |
 | `mcp_with_resources.py` | An advanced server showing both tools AND resources |
-| `claude_desktop_config_example.json` | How to configure Claude Desktop to use these servers |
+| `claude_desktop_config_example.json` | How to configure a desktop MCP client to use these servers |
 
 ### Quick Start
 
@@ -230,10 +232,10 @@ In a new Claude Desktop conversation, you should see a small hammer/tools icon i
 # 1. Install the MCP Python SDK
 pip install mcp
 
-# 2. Run the simple server (for testing — Claude Desktop runs it automatically)
+# 2. Run the simple server (for testing — your MCP client runs it automatically)
 python simple_mcp_server.py
 
-# 3. Or configure Claude Desktop to run it (see the config example)
+# 3. Or configure your MCP client to run it (see the config example)
 ```
 
 ---
@@ -253,5 +255,5 @@ python simple_mcp_server.py
 - [MCP Official Documentation](https://modelcontextprotocol.io)
 - [MCP GitHub Repository](https://github.com/modelcontextprotocol)
 - [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
-- [Claude Desktop MCP Setup Guide](https://docs.anthropic.com/en/docs/agents-and-tools/mcp)
+- [MCP Client Setup Guide](https://modelcontextprotocol.io/quickstart/user)
 - [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers) — community directory of pre-built servers

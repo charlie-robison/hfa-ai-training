@@ -183,7 +183,7 @@ Provide scores and brief justification for each. Return as JSON.
 - LLM judges have biases (they tend to prefer longer, more verbose responses)
 - Always validate your judge against human evaluations first
 - Use specific, measurable criteria -- not vague ones like "is it good?"
-- Consider using a stronger model as the judge (e.g., Claude Opus judging Claude Haiku outputs)
+- Consider using a stronger model as the judge (e.g., GPT-4o judging GPT-4o-mini outputs)
 
 See `llm_as_judge.py` for a working example.
 
@@ -380,10 +380,10 @@ def run_stage_with_retry(stage_fn, input_data, max_retries=3):
 
 ```bash
 # Install dependencies
-pip install anthropic scikit-learn deepeval numpy
+pip install openai scikit-learn deepeval numpy
 
 # Set your API key
-export ANTHROPIC_API_KEY="your-key-here"
+export OPENAI_API_KEY="your-key-here"
 
 # Run individual examples
 python simple_pipeline.py

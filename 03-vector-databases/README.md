@@ -189,14 +189,14 @@ Vector databases are great at *similarity* matching:
 
 | Database    | Type             | Best For                          |
 |-------------|------------------|-----------------------------------|
-| **ChromaDB**    | Embedded (local) | Prototyping, small projects, learning |
+| **Pinecone**    | Managed cloud    | Production apps, managed service, easy to start |
 | **pgvector**    | PostgreSQL extension | Teams already using PostgreSQL     |
-| **Pinecone**    | Cloud service    | Production apps, managed service  |
+| **ChromaDB**    | Embedded (local) | Prototyping, small local projects  |
 | **Weaviate**    | Self-hosted/cloud | Full-featured, hybrid search      |
 | **Qdrant**      | Self-hosted/cloud | High performance, filtering       |
 | **FAISS**       | Library (Meta)   | Research, large-scale similarity  |
 
-For this training, we use **ChromaDB** because it runs locally, requires no setup, and is perfect for learning.
+For this training, we use **Pinecone** because it is a fully managed cloud vector database -- no infrastructure to maintain, simple API, and scales from learning to production with no changes.
 
 ### How a Vector Database Works
 
@@ -446,7 +446,7 @@ This module includes three Python scripts to explore:
 ### Setup
 
 ```bash
-pip install chromadb openai numpy scikit-learn sentence-transformers
+pip install pinecone openai numpy scikit-learn sentence-transformers
 ```
 
 ### Files
@@ -454,7 +454,7 @@ pip install chromadb openai numpy scikit-learn sentence-transformers
 | File | Description |
 |------|-------------|
 | `embeddings_example.py` | Explore how embeddings work, compare word similarities, see the "king - man + woman = queen" analogy |
-| `chromadb_example.py` | Full workflow with ChromaDB: create a collection, add documents, query by similarity, filter by metadata |
+| `pinecone_example.py` | Full workflow with Pinecone: create an index, upsert documents with OpenAI embeddings, query by similarity, filter by metadata |
 | `semantic_search.py` | Real estate semantic search: embed property listings, search by natural language, see how meaning-based search outperforms keywords |
 
 ### Running the Examples
@@ -463,14 +463,19 @@ pip install chromadb openai numpy scikit-learn sentence-transformers
 # embeddings_example.py uses sentence-transformers (free, runs locally)
 python embeddings_example.py
 
-# chromadb_example.py uses ChromaDB with its default embedding function
-python chromadb_example.py
+# pinecone_example.py uses Pinecone with OpenAI embeddings (requires PINECONE_API_KEY and OPENAI_API_KEY)
+python pinecone_example.py
 
-# semantic_search.py combines ChromaDB with real estate data
+# semantic_search.py combines Pinecone with real estate data
 python semantic_search.py
 ```
 
-> **Note:** The examples default to free, local models (sentence-transformers). If you want to use OpenAI embeddings instead, set your API key: `export OPENAI_API_KEY="sk-your-key-here"`
+> **Note:** The embeddings example defaults to free, local models (sentence-transformers). The Pinecone examples require API keys:
+> ```bash
+> export PINECONE_API_KEY="your-pinecone-key-here"
+> export OPENAI_API_KEY="sk-your-key-here"
+> ```
+> Pinecone is a managed cloud database and does not generate embeddings on its own -- we use OpenAI's embedding models to create vectors, then store and search them in Pinecone.
 
 ---
 

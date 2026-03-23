@@ -278,13 +278,12 @@ The embedding model determines how well your search works.
 
 | Model | Dimensions | Notes |
 |---|---|---|
-| ChromaDB default | 384 | Good for prototyping, ships with ChromaDB |
 | OpenAI `text-embedding-3-small` | 1536 | Great quality, widely used |
 | OpenAI `text-embedding-3-large` | 3072 | Best quality from OpenAI |
 | Cohere `embed-english-v3.0` | 1024 | Strong alternative |
 | Voyage AI `voyage-3` | 1024 | Built for code + text |
 
-For this training, we use ChromaDB's built-in embedding function to keep things simple.
+For this training, we use OpenAI's `text-embedding-3-small` for embeddings and Pinecone as the managed cloud vector database. Unlike ChromaDB which auto-embeds documents with a built-in model, Pinecone requires you to generate embeddings yourself -- giving you full control over which embedding model to use.
 
 ### 3. Reranking
 
@@ -345,23 +344,22 @@ Your RAG prompt should:
 | File | Description |
 |---|---|
 | `sample_documents.py` | Sample company documents (policies, FAQs, product info) |
-| `simple_rag.py` | Basic end-to-end RAG pipeline with ChromaDB + Claude |
-| `rag_with_sources.py` | Enhanced RAG with source citations, scores, and reranking |
+| `simple_rag.ipynb` | Basic end-to-end RAG pipeline with OpenAI embeddings + Pinecone |
+| `rag_with_sources.ipynb` | Enhanced RAG with source citations, scores, and reranking |
 
 ### Running the Examples
 
 ```bash
 # Install dependencies
-pip install anthropic chromadb
+pip install openai pinecone
 
-# Set your API key
-export ANTHROPIC_API_KEY="your-key-here"
+# Set your API keys
+export OPENAI_API_KEY="your-key-here"
+export PINECONE_API_KEY="your-key-here"
 
-# Run the simple RAG example
-python simple_rag.py
-
-# Run the enhanced RAG with sources
-python rag_with_sources.py
+# Open the notebooks in Jupyter
+jupyter notebook simple_rag.ipynb
+jupyter notebook rag_with_sources.ipynb
 ```
 
 ---

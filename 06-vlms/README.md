@@ -39,14 +39,6 @@ Gemini is currently the **best VLM for vision tasks**, especially:
 
 > **Seminar Talking Point:** If you need to analyze video or process many images at once, Gemini is your go-to. It was built multimodal from day one — vision isn't bolted on, it's core to the model.
 
-### Claude — Strong Document and Chart Analysis
-
-Claude (from Anthropic) has excellent vision capabilities:
-- **Document parsing** — great at reading scanned documents, receipts, forms
-- **Chart interpretation** — accurately reads bar charts, pie charts, line graphs
-- **Detailed analysis** — tends to be thorough and careful in its visual descriptions
-- **Safety-conscious** — careful about what it identifies and claims
-
 ### GPT-4o — Good All-Around Multimodal
 
 OpenAI's GPT-4o offers solid vision:
@@ -57,16 +49,16 @@ OpenAI's GPT-4o offers solid vision:
 
 ### Comparison Table
 
-| Capability | Gemini | Claude | GPT-4o |
-|---|---|---|---|
-| **Image analysis** | Excellent | Excellent | Very Good |
-| **Document/OCR parsing** | Excellent | Excellent | Good |
-| **Chart reading** | Very Good | Excellent | Good |
-| **Video understanding** | Best in class | Not supported | Limited |
-| **Context window (images)** | Huge (millions of tokens) | Large (200K tokens) | Large (128K tokens) |
-| **Spatial reasoning** | Excellent | Good | Good |
-| **Speed** | Fast | Moderate | Fast |
-| **Structured data extraction** | Excellent | Excellent | Good |
+| Capability | Gemini | GPT-4o |
+|---|---|---|
+| **Image analysis** | Excellent | Very Good |
+| **Document/OCR parsing** | Excellent | Good |
+| **Chart reading** | Excellent | Good |
+| **Video understanding** | Best in class | Limited |
+| **Context window (images)** | Huge (millions of tokens) | Large (128K tokens) |
+| **Spatial reasoning** | Excellent | Good |
+| **Speed** | Fast | Fast |
+| **Structured data extraction** | Excellent | Good |
 
 ---
 
@@ -193,10 +185,10 @@ Now an AI agent can handle the **entire pipeline** — from perception to action
 
 | File | What It Demonstrates |
 |---|---|
-| `gemini_vision_example.py` | Using Google Gemini to analyze images — the current best VLM |
-| `claude_vision_example.py` | Using Claude's vision for document analysis and structured extraction |
-| `vlm_plus_mcp_concept.py` | The "Brain" concept — VLM sees, MCP acts (see-think-act pipeline) |
-| `compare_vlms.py` | Sending the same image to multiple VLMs and comparing outputs |
+| `gemini_vision_example.ipynb` | Using Google Gemini to analyze images — multi-turn conversations, structured extraction |
+| `gemini_vision_basics.ipynb` | Gemini vision basics — URL images, local files, comparisons, data extraction |
+| `vlm_plus_mcp_concept.ipynb` | The "Brain" concept — Gemini VLM sees, MCP acts (see-think-act pipeline) |
+| `compare_vlms.ipynb` | Sending the same image to Gemini and GPT-4o and comparing outputs |
 
 ---
 
@@ -205,7 +197,7 @@ Now an AI agent can handle the **entire pipeline** — from perception to action
 ### Install Dependencies
 
 ```bash
-pip install google-generativeai anthropic httpx pillow
+pip install google-generativeai openai httpx pillow
 ```
 
 ### API Keys Needed
@@ -213,18 +205,18 @@ pip install google-generativeai anthropic httpx pillow
 ```bash
 # Set these environment variables before running the examples
 export GOOGLE_API_KEY="your-google-api-key"
-export ANTHROPIC_API_KEY="your-anthropic-api-key"
+export OPENAI_API_KEY="your-openai-api-key"   # Only needed for compare_vlms.ipynb
 ```
 
 - **Google API Key:** Get one free at https://aistudio.google.com/apikey
-- **Anthropic API Key:** Get one at https://console.anthropic.com/
+- **OpenAI API Key:** Get one at https://platform.openai.com/api-keys (only needed for the comparison notebook)
 
 ---
 
 ## Key Takeaways
 
 1. **VLMs can see AND reason** — they don't just detect objects, they understand scenes, read documents, and answer questions about images.
-2. **Gemini leads in vision** — especially for video and large-scale image processing. Claude excels at careful document analysis.
+2. **Gemini leads in vision** — especially for video, large-scale image processing, document parsing, and structured data extraction.
 3. **VLMs are the future of robotics** — giving machines the ability to see and understand the world.
 4. **VLMs + MCPs = the "Brain"** — perception (VLM) plus action (MCP) creates agents that can see, think, and do.
 5. **Practical value is here today** — document parsing, photo analysis, and visual inspection are real, production-ready use cases right now.

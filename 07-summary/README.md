@@ -13,7 +13,7 @@ We started at the foundation: what an AI agent actually is and how to build one 
 - **Prompting** is the interface between you and the model. Vague prompts produce vague results. Specific, structured prompts produce reliable outputs.
 - **Test-Driven Development (TDD)** applies to agents just like it applies to software. Write the test first, then build the agent to pass it.
 - **Context windows** are finite. Every token you send costs money and attention. Learn to manage what goes in and what stays out.
-- **Choosing models** matters. Claude excels at code generation, GPT at complex reasoning chains, Gemini at multimodal tasks. Pick the right tool for the job.
+- **Choosing models** matters. GPT-4o excels at code generation and complex reasoning, Gemini at multimodal and vision tasks. Pick the right tool for the job.
 - **Few-shot examples** teach the model by showing, not telling. Include 2-3 examples of the exact input/output format you expect.
 - **Evidence-based prompting** is the single most important pattern. Never let an agent guess. Force it to cite sources, reference data, and show its work.
 
@@ -104,7 +104,7 @@ These eight principles apply across every topic we covered:
 
 2. **Use evidence-based approaches.** Do not let agents guess. Force them to retrieve data, cite sources, and show reasoning. Hallucination is the default; evidence is the antidote.
 
-3. **Choose the right tool for the job.** Claude for code generation and analysis. GPT for complex multi-step reasoning. Gemini for vision and multimodal tasks. No single model wins at everything.
+3. **Choose the right tool for the job.** GPT-4o for code generation, analysis, and complex multi-step reasoning. Gemini for vision and multimodal tasks. No single model wins at everything.
 
 4. **Evaluate everything.** Use LLM-as-a-judge for qualitative checks. Use DeepEval for quantitative metrics. If you are not measuring quality, you are shipping hope.
 
@@ -123,7 +123,7 @@ These eight principles apply across every topic we covered:
 If you are starting from scratch, follow this order:
 
 ### Week 1-2: Foundations
-- Get comfortable with the OpenAI, Anthropic, and Google AI Python SDKs.
+- Get comfortable with the OpenAI and Google AI Python SDKs.
 - Build a simple single-agent chatbot.
 - Practice writing structured prompts with few-shot examples.
 - Experiment with different models to feel the differences.
@@ -134,7 +134,7 @@ If you are starting from scratch, follow this order:
 - Implement LLM-as-a-judge to score your pipeline outputs.
 
 ### Week 5-6: Retrieval
-- Set up ChromaDB locally.
+- Set up a Pinecone index.
 - Generate embeddings for a small document corpus.
 - Build a RAG agent that answers questions from your documents.
 
@@ -149,21 +149,20 @@ If you are starting from scratch, follow this order:
 ## Useful Resources and Links
 
 ### Documentation
-- [Anthropic API Docs](https://docs.anthropic.com/)
 - [OpenAI API Docs](https://platform.openai.com/docs)
 - [Google AI / Gemini Docs](https://ai.google.dev/docs)
-- [ChromaDB Docs](https://docs.trychroma.com/)
+- [Pinecone Docs](https://docs.pinecone.io/)
 - [DeepEval Docs](https://docs.confident-ai.com/)
 - [Model Context Protocol Spec](https://modelcontextprotocol.io/)
 
 ### Learning
-- [Anthropic's Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)
+- [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
 - [OpenAI Cookbook](https://cookbook.openai.com/)
 - [LangChain RAG Tutorial](https://python.langchain.com/docs/tutorials/rag/)
-- [ChromaDB Getting Started](https://docs.trychroma.com/getting-started)
+- [Pinecone Getting Started](https://docs.pinecone.io/guides/get-started/overview)
 
 ### Tools
-- [Claude Code](https://claude.com/claude-code) — AI-powered coding assistant
+- [OpenAI Platform](https://platform.openai.com/) — API playground and tools
 - [LM Studio](https://lmstudio.ai/) — Run local models for development and testing
 - [Ollama](https://ollama.com/) — Run open-source models locally
 
@@ -176,7 +175,7 @@ Here are project ideas, ordered roughly by complexity:
 ### Beginner
 - **Meeting Notes Summarizer** — Record a meeting, transcribe it, and have an agent extract action items, decisions, and follow-ups.
 - **Email Draft Assistant** — An agent that takes bullet points and writes professional emails in your voice (use few-shot examples of your actual emails).
-- **Document Q&A Bot** — Load a set of PDFs into ChromaDB and build a RAG agent that answers questions with citations.
+- **Document Q&A Bot** — Load a set of PDFs into Pinecone and build a RAG agent that answers questions with citations.
 
 ### Intermediate
 - **Lead Research Pipeline** — An agent pipeline that takes a name, searches public records, summarizes findings, and scores lead quality. Chain a search agent, a summarizer agent, and a scoring agent.

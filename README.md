@@ -12,7 +12,7 @@ This repository contains all materials, code examples, and guides for the HFA AI
 |---------|-------|
 | [01 - Building Agents](./01-building-agents/) | Prompting, TDD, context windows, model selection, few-shot examples |
 | [02 - Agent Pipelines](./02-agent-pipelines/) | Chaining agents, ML + LLMs, LLM as a judge, evals with DeepEval |
-| [03 - Vector Databases](./03-vector-databases/) | Embeddings, semantic search, ChromaDB |
+| [03 - Vector Databases](./03-vector-databases/) | Embeddings, semantic search, Pinecone |
 | [04 - RAG Agents](./04-rag-agents/) | Retrieval Augmented Generation, grounding LLMs in your data |
 | [05 - MCP](./05-mcp/) | Model Context Protocol, giving agents tools and real-world capabilities |
 | [06 - VLMs](./06-vlms/) | Vision Language Models, Gemini, robotics, VLM + MCP architectures |
@@ -31,28 +31,28 @@ Before the seminar, make sure you have the following set up:
 - A code editor (VS Code recommended)
 
 ### API Keys
-You will need API keys for at least one of the following providers. We will use all three during the seminar:
+You will need API keys for at least one of the following providers. We will use both during the seminar:
 
 | Provider | Sign Up | Used For |
 |----------|---------|----------|
-| Anthropic (Claude) | [console.anthropic.com](https://console.anthropic.com/) | Code generation, analysis, agent building |
-| OpenAI (GPT) | [platform.openai.com](https://platform.openai.com/) | Reasoning, embeddings, evals |
+| OpenAI (GPT-4o) | [platform.openai.com](https://platform.openai.com/) | Code generation, analysis, agent building, reasoning, embeddings, evals |
 | Google AI (Gemini) | [aistudio.google.com](https://aistudio.google.com/) | Vision, multimodal tasks |
+| Pinecone | [app.pinecone.io](https://app.pinecone.io/) | Vector database for semantic search and RAG |
 
 Set your keys as environment variables:
 
 ```bash
-export ANTHROPIC_API_KEY="your-key-here"
 export OPENAI_API_KEY="your-key-here"
 export GOOGLE_API_KEY="your-key-here"
+export PINECONE_API_KEY="your-key-here"
 ```
 
 Or create a `.env` file in the repo root (already in `.gitignore`):
 
 ```
-ANTHROPIC_API_KEY=your-key-here
 OPENAI_API_KEY=your-key-here
 GOOGLE_API_KEY=your-key-here
+PINECONE_API_KEY=your-key-here
 ```
 
 ---
@@ -83,7 +83,7 @@ The foundation of everything that follows. Learn how to write effective prompts,
 Single agents have limits. Pipelines break complex tasks into stages where each agent handles one responsibility. Learn to chain agents together, combine traditional ML with LLMs, use one model to judge another, and measure quality with DeepEval's deterministic, hallucination, and evidence-based evaluations.
 
 ### 03 - Vector Databases
-Before you can do retrieval, you need to understand how machines represent meaning. Explore embeddings for words, sentences, and images. Build semantic search with ChromaDB that finds results by meaning, not just keywords. Learn when vector databases are the right choice and when they are not.
+Before you can do retrieval, you need to understand how machines represent meaning. Explore embeddings for words, sentences, and images. Build semantic search with Pinecone that finds results by meaning, not just keywords. Learn when vector databases are the right choice and when they are not.
 
 ### 04 - RAG Agents
 Retrieval Augmented Generation is the pattern that connects LLMs to your actual data. Build agents that search a knowledge base, retrieve relevant context, and generate grounded answers with citations. This is the most practical pattern for making AI useful in a business context.
@@ -121,7 +121,7 @@ hfa-ai-training/
 ├── requirements.txt           # Python dependencies
 ├── 01-building-agents/        # Prompting, TDD, model selection
 ├── 02-agent-pipelines/        # Chaining agents, evals, ML + LLMs
-├── 03-vector-databases/       # Embeddings, semantic search, ChromaDB
+├── 03-vector-databases/       # Embeddings, semantic search, Pinecone
 ├── 04-rag-agents/             # Retrieval Augmented Generation
 ├── 05-mcp/                    # Model Context Protocol
 ├── 06-vlms/                   # Vision Language Models
