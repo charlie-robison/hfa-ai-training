@@ -10,7 +10,7 @@ This repository contains all materials, code examples, and guides for the HFA AI
 
 | Section | Topic |
 |---------|-------|
-| [01 - Building Agents](./01-building-agents/) | Prompting, TDD, context windows, model selection, few-shot examples |
+| [01 - Building Agents](02-building-agents/) | Prompting, TDD, context windows, model selection, few-shot examples |
 | [02 - Agent Pipelines](./02-agent-pipelines/) | Chaining agents, ML + LLMs, LLM as a judge, evals with DeepEval |
 | [03 - Vector Databases](./03-vector-databases/) | Embeddings, semantic search, Pinecone |
 | [04 - RAG Agents](./04-rag-agents/) | Retrieval Augmented Generation, grounding LLMs in your data |
